@@ -18,7 +18,7 @@ func GetNotes(w http.ResponseWriter, r *http.Request) {
 	// err := validate.RequiredData(data, requiredFields)
 	count, err := validate.RequiredParams(params, requiredFields)
 	if err != nil {
-		view.RenderErrorJson(apperror.NewRequiredError{err.Error(), requiredFields[count]})
+		view.RenderErrorJson(apperror.NewRequiredError(err.Error(), requiredFields[count]))
 		// result := make(map[string]interface{})
 		// result["error"] = err.Error()
 		// result["response"] = "error"
@@ -56,13 +56,14 @@ func SaveNotes(w http.ResponseWriter, r *http.Request) {
 	dbMap, data, _ := Init(w, r)
 	note := model.Note{}
 	requiredFields := []string{"title", "body"}
-	err := validate.RequiredData(data, requiredFields)
+	count, err := validate.RequiredData(data, requiredFields)
 	//err := validate.RequiredParams(params, requiredFields)
 	if err != nil {
-		result := make(map[string]interface{})
-		result["error"] = err.Error()
-		result["response"] = "error"
-		view.RenderJson(result)
+		view.RenderErrorJson(apperror.NewRequiredError(err.Error(), requiredFields[count]))
+		// result := make(map[string]interface{})
+		// result["error"] = err.Error()
+		// result["response"] = "error"
+		// view.RenderJson(result)
 		return
 	}
 	note.Content = data["body"].(string)

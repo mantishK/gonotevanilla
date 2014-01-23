@@ -20,9 +20,9 @@ func RequiredData(data map[string]interface{}, keys []string) (int, error) {
 	return -1, nil
 }
 
-func RequiredParams(data url.Values, keys []string) error {
+func RequiredParams(data url.Values, keys []string) (int, error) {
 	if data == nil {
-		return errors.New("data not set")
+		return 0, errors.New("data not set")
 	}
 	for count, value := range keys {
 		_, ok := data[value]
@@ -30,5 +30,5 @@ func RequiredParams(data url.Values, keys []string) error {
 			return count, errors.New(value + " required ")
 		}
 	}
-	return nil
+	return -1, nil
 }
