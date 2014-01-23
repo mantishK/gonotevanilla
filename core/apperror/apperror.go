@@ -32,22 +32,22 @@ func NewInvalidInputError(message string, err error, field string) Apperror {
 	return Apperror{id: 2, message: message, sys_message: err.Error(), field: field}
 }
 
-func (err *Apperror) getId() int {
+func (err *Apperror) GetId() int {
 	return err.id
 }
 
-func (err *Apperror) getIdString() string {
+func (err *Apperror) GetIdString() string {
 	return strconv.Itoa(err.id)
 }
 
-func (err *Apperror) getMessage() string {
+func (err *Apperror) GetMessage() string {
 	return err.message
 }
 
-func (err *Apperror) getSysMesage() string {
+func (err *Apperror) GetSysMesage() string {
 	return err.sys_message
 }
 
-func (err *Apperror) getfield() string {
+func (err *Apperror) GetField() string {
 	return err.field
 }

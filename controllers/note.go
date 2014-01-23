@@ -15,14 +15,9 @@ func GetNotes(w http.ResponseWriter, r *http.Request) {
 	dbMap, _, params := Init(w, r)
 	note := model.Note{}
 	requiredFields := []string{"start", "limit"}
-	// err := validate.RequiredData(data, requiredFields)
 	count, err := validate.RequiredParams(params, requiredFields)
 	if err != nil {
 		view.RenderErrorJson(apperror.NewRequiredError(err.Error(), requiredFields[count]))
-		// result := make(map[string]interface{})
-		// result["error"] = err.Error()
-		// result["response"] = "error"
-		// view.RenderJson(result)
 		return
 	}
 
