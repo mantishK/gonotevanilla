@@ -29,7 +29,14 @@ func NewInvalidInputError(message string, err error, field string) Apperror {
 	if len(message) == 0 {
 		message = "Invalid field"
 	}
-	return Apperror{id: 2, message: message, sys_message: err.Error(), field: field}
+	return Apperror{id: 3, message: message, sys_message: err.Error(), field: field}
+}
+
+func NewResourceMissingError(message string) Apperror {
+	if len(message) == 0 {
+		message = "Resource missing"
+	}
+	return Apperror{id: 4, message: message}
 }
 
 func (err *Apperror) GetId() int {
