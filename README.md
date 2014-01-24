@@ -1,3 +1,4 @@
+[![baby-gopher](https://raw2.github.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
 GoNoteVanilla
 =============
 
@@ -18,4 +19,4 @@ How to run it
 
 - go run github.com/mantishK/gonotevanilla/main.go
 
-###Cheers !!
+####Cheers !!
