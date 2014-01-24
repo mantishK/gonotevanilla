@@ -22,6 +22,17 @@ func (n *Note) Get(dbMap *gorp.DbMap, start, limit int) ([]Note, int, error) {
 	return notes, len(notes), nil
 }
 
+func GetNote(dbMap *gorp.DbMap, id int) (Note, error) {
+	notes := []Note{}
+	_, err := dbMap.Select(&notes, "SELECT * FROM note WHERE note_id = ? LIMIT 1", id)
+	if err != nil {
+		return Note{}, err
+	} else if len(notes) == 0 {
+		return Note{}, nil
+	}
+	return notes[0], nil
+}
+
 func (n *Note) Save(dbMap *gorp.DbMap) error {
 	n.Created = time.Now().Unix()
 	n.Modified = time.Now().Unix()

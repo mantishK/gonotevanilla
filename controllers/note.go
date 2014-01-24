@@ -82,6 +82,15 @@ func EditNote(w http.ResponseWriter, r *http.Request) {
 		view.RenderErrorJson(apperror.NewInvalidInputError("", err, "limit"))
 		return
 	}
+	verifyNote, err := model.GetNote(dbMap, note.Note_id)
+	if err != nil {
+		view.RenderErrorJson(apperror.NewDBError("", err))
+		return
+	}
+	if verifyNote.Note_id == 0 {
+		view.RenderErrorJson(apperror.NewResourceMissingError("Note not in DB"))
+		return
+	}
 	note.Content = data["body"].(string)
 	note.Title = data["title"].(string)
 	updatedRows, err := note.Update(dbMap)
@@ -112,6 +121,15 @@ func DeleteNote(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	note.Note_id = note_id
+	verifyNote, err := model.GetNote(dbMap, note.Note_id)
+	if err != nil {
+		view.RenderErrorJson(apperror.NewDBError("", err))
+		return
+	}
+	if verifyNote.Note_id == 0 {
+		view.RenderErrorJson(apperror.NewResourceMissingError("Note not in DB"))
+		return
+	}
 	deletedRows, err := note.Delete(dbMap)
 	if err != nil {
 		view.RenderErrorJson(apperror.NewDBError("", err))
