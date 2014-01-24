@@ -11,7 +11,7 @@ How to use it
 
 - Install Go
 - go get github.com/mantishK/gonotevanilla
-- got get github.com/coopernurse/gorp
+- go get github.com/coopernurse/gorp
 - configure mysql db at config/dbconn.go
 
 How to run it
