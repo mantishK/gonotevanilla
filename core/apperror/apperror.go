@@ -20,14 +20,14 @@ func NewDBError(message string, err error) Apperror {
 
 func NewRequiredError(message string, field string) Apperror {
 	if len(message) == 0 {
-		message = "A required field is missing"
+		message = "Field required"
 	}
 	return Apperror{id: 2, message: message, field: field}
 }
 
 func NewInvalidInputError(message string, err error, field string) Apperror {
 	if len(message) == 0 {
-		message = "A field is invalid"
+		message = "Invalid field"
 	}
 	return Apperror{id: 2, message: message, sys_message: err.Error(), field: field}
 }

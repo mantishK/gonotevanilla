@@ -31,3 +31,22 @@ func (n *Note) Save(dbMap *gorp.DbMap) error {
 	}
 	return nil
 }
+
+func (n *Note) Update(dbMap *gorp.DbMap) (int64, error) {
+	n.Modified = time.Now().Unix()
+	count, err := dbMap.Update(n)
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+	//return errors.New("emit macho dwarf: elf header corrupted")
+}
+
+func (n *Note) Delete(dbMap *gorp.DbMap) (int64, error) {
+	count, err := dbMap.Delete(n)
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+	//return errors.New("emit macho dwarf: elf header corrupted")
+}
