@@ -10,7 +10,12 @@ import (
 	"strconv"
 )
 
-func GetNotes(w http.ResponseWriter, r *http.Request) {
+type Note struct {
+}
+
+var NoteController Note
+
+func (n *Note) GetNotes(w http.ResponseWriter, r *http.Request) {
 	view := views.NewView(w)
 	dbMap, _, params := Init(w, r)
 	note := model.Note{}
@@ -46,7 +51,7 @@ func GetNotes(w http.ResponseWriter, r *http.Request) {
 	view.RenderJson(result)
 }
 
-func SaveNotes(w http.ResponseWriter, r *http.Request) {
+func (n *Note) SaveNotes(w http.ResponseWriter, r *http.Request) {
 	view := views.NewView(w)
 	dbMap, data, _ := Init(w, r)
 	note := model.Note{}
