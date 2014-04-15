@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"github.com/coopernurse/gorp"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/mantishK/gonotevanilla/model"
+	"github.com/mantishK/gonotevanilla/models"
 	"log"
 	"strconv"
 	"strings"

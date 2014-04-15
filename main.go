@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/mantishK/gonotevanilla/controllers"
 	"github.com/mantishK/gonotevanilla/core/router"
+	"github.com/mantishK/gonotevanilla/filters"
 	"log"
 	"net/http"
 )
@@ -11,11 +12,19 @@ func main() {
 	route()
 }
 func route() {
+	//Create filters
+	authenticateFilter := new(filters.Authenticate)
+	authorizeFilter := new(filters.Authorize)
+
+	//Create controller
 	noteController := controllers.NoteController
+
+	//Create Router
 	myRouter := router.New()
-	// http.HandleFunc("/", noteController.GetNotes)
-	// http.HandleFunc("/add", noteController.SaveNotes)
-	myRouter.Get("/", noteController.GetNotes)
+
+	//route
+	myRouter.Get("/", noteController.GetNotes, authenticateFilter, authorizeFilter)
+
 	http.Handle("/", myRouter)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {

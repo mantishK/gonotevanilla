@@ -4,7 +4,7 @@ import (
 	// "fmt"
 	"github.com/mantishK/gonotevanilla/core/apperror"
 	"github.com/mantishK/gonotevanilla/core/validate"
-	"github.com/mantishK/gonotevanilla/model"
+	"github.com/mantishK/gonotevanilla/models"
 	"github.com/mantishK/gonotevanilla/views"
 	"net/http"
 	"strconv"
