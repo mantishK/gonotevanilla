@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/mantishK/gonotevanilla/filters"
 	"net/http"
+	"strings"
 )
 
 type router struct {
