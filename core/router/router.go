@@ -73,7 +73,7 @@ func (r *router) Trace(route string, newControllerMethod func(http.ResponseWrite
 
 func (r *router) ServeHTTP(writer http.ResponseWriter, req *http.Request) {
 	method := req.Method
-	requestURI := req.RequestURI
+	requestURI := strings.Split(req.RequestURI, "?")[0]
 	filterReturnVal := r.executeFilters(method, requestURI, writer, req)
 	if filterReturnVal == true {
 		r.routeMethodMap[requestURI][method](writer, req)
