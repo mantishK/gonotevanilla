@@ -24,6 +24,7 @@ func route() {
 
 	//route
 	myRouter.Get("/", noteController.GetNotes, authenticateFilter, authorizeFilter)
+	myRouter.Get("/notes", noteController.GetNotes, authenticateFilter, authorizeFilter)
 
 	http.Handle("/", myRouter)
 	err := http.ListenAndServe(":8080", nil)

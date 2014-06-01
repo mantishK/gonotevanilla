@@ -20,6 +20,9 @@ func New() *router {
 
 func (r *router) setMethodMap(httpMethod, route string, newControllerMethod func(http.ResponseWriter, *http.Request),
 	filterSlice []filters.Filterable) {
+	if !strings.HasSuffix(route, "/") {
+		route = route + "/"
+	}
 	if r.routeMethodMap[route] == nil {
 		r.routeMethodMap[route] = make(map[string]func(http.ResponseWriter, *http.Request))
 	}
@@ -75,6 +78,9 @@ func (r *router) Trace(route string, newControllerMethod func(http.ResponseWrite
 func (r *router) ServeHTTP(writer http.ResponseWriter, req *http.Request) {
 	method := req.Method
 	requestURI := strings.Split(req.RequestURI, "?")[0]
+	if !strings.HasSuffix(requestURI, "/") {
+		requestURI = requestURI + "/"
+	}
 	filterReturnVal := r.executeFilters(method, requestURI, writer, req)
 	if filterReturnVal == true {
 		r.routeMethodMap[requestURI][method](writer, req)
